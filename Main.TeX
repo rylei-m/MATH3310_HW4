@@ -1,0 +1,308 @@
+\documentclass[10pt, AMS Euler]{article}
+\usepackage{graphicx} % Required for inserting images
+\textheight=9.25in \textwidth=7in \topmargin=-.75in
+\oddsidemargin=-0.25in
+\evensidemargin=-0.25in
+\usepackage{url}  % The bib file uses this
+\usepackage{graphicx} %to import pictures
+\usepackage{amsmath, amssymb, wasysym}
+\usepackage{theorem, concrete, multicol}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes, shapes.multipart, arrows.meta} %For arrows and what-not
+
+
+\setlength{\intextsep}{5mm} \setlength{\textfloatsep}{5mm}
+\setlength{\floatsep}{5mm}
+
+
+{\theorembodyfont{\rmfamily}
+	\newtheorem{definition}{Definition}[section]}
+{\theorembodyfont{\rmfamily} \newtheorem{example}{Example}[section]}
+{\theorembodyfont{\rmfamily} \newtheorem{lemma}{Lemma}[section]}
+{\theorembodyfont{\rmfamily} \newtheorem{theorem}{Theorem}[section]}
+{\theorembodyfont{\rmfamily} \newenvironment{proof}{\par{\it
+			Proof:}}{\nopagebreak[4]\rule{2mm}{2mm}}}
+
+
+%%%%  SHORTCUT COMMANDS  %%%%
+\newcommand{\ds}{\displaystyle}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\arc}{\rightarrow}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\stirling}[2]{\genfrac{\{}{\}}{0pt}{}{#1}{#2}}
+
+%%%%  footnote style %%%%
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\pagestyle{empty}
+
+
+\title{MATH3310 HW4}
+\author{Rylei Mindrum}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+	\noindent \underline{\hspace{3in}}\\
+	\noindent{\bf Homework \#4:} ({\bf Due 10/11/2024}).\\
+	
+	\begin{enumerate}
+		
+		\item Use the Principle of Mathematical Induction to prove the following relationship:
+		$$\sum_{i=1}^n i^3 = \left(\frac{n(n+1)}{2}\right)^2, \;\;\;\; \mbox{ for } n \in \Z^+.$$
+            \item[\bf{Claim}]: For all $n \in \mathbb{Z}^+$,
+                    \[
+                    \sum_{i=1}^n i^3 = \left( \frac{n(n+1)}{2} \right)^2
+                    \]
+                    Basically, checking that the formula holds all positive numebrs (n). 
+            \begin{proof}
+                \item[\bf{Proof}:]
+                    \noindent\textbf{Proof (by induction):} 
+                    \noindent Induction - The Principle of Mathematical Induction is a method of proof used to show that a statement $P(n)$ holds for all natural numbers $n \in \mathbb{Z}^+$. Induction consists of two steps:
+                    \begin{enumerate}
+                        \item Base - Proving that the statement $P(1)$ is true.
+                        \item Induct -  Assume that $P(k)$ is true for some arbitrary $k \in \mathbb{Z}^+$. Then prove that $P(k+1)$ is also true.
+                    \end{enumerate}
+                    and now i will attempt to do this for:
+                    \[
+                    \sum_{i=1}^n i^3 = \left(\frac{n(n+1)}{2}\right)^2, \;\;\;\; \mbox{ for } n \in \mathbb{Z}^+.
+                    \]
+                    a: for the base I will calculate both sides of the equation for $n=1$. \\ left equation:
+                    \[
+                    \sum_{i=1}^1 i^3 = 1^3 = 1
+                    \]
+                    right side:  
+                    \[
+                    \left( \frac{1(1+1)}{2} \right)^2 = \left( \frac{1 \cdot 2}{2} \right)^2 = 1^2 = 1
+                    \]
+                    since both sides of the equation equal 1, the base case is confirmed: 
+                    \[
+                    1 = 1
+                    \]
+                    
+                    Induct: Assume that the statement is true for some $n = k$
+                    \[
+                    \sum_{i=1}^k i^3 = \left( \frac{k(k+1)}{2} \right)^2
+                    \]
+                    now I will prove that the statement holds for $n = k+1$.
+                    \\ Basically this has to be true:
+                    \[
+                    \sum_{i=1}^{k+1} i^3 = \left( \frac{(k+1)((k+1)+1)}{2} \right)^2
+                    \]
+                    I'll do the same left/right side thing as above. \\ Starting with the left side:
+                    \[
+                    \sum_{i=1}^{k+1} i^3 = \sum_{i=1}^k i^3 + (k+1)^3
+                    \]
+                    The inductive hypothesis for $\sum_{i=1}^k i^3$, so:
+                    \[
+                    \sum_{i=1}^{k+1} i^3 = \left( \frac{k(k+1)}{2} \right)^2 + (k+1)^3
+                    \]
+                    Simplifying this expression. First, I will Factor out $(k+1)^2$ from the two terms:
+                    \[
+                    \sum_{i=1}^{k+1} i^3 = (k+1)^2 \left( \left( \frac{k}{2} \right)^2 + (k+1) \right)
+                    \]
+                    Now to simplify the inner term:
+                    \[
+                    \left( \frac{k}{2} \right)^2 + (k+1) = \frac{k^2}{4} + \frac{4(k+1)}{4} = \frac{k^2 + 4(k+1)}{4}
+                    \]
+                    \[
+                    = \frac{k^2 + 4k + 4}{4} = \frac{(k+2)^2}{4}
+                    \]
+                    And now we have:
+                    \[
+                    \sum_{i=1}^{k+1} i^3 = (k+1)^2 \cdot \frac{(k+2)^2}{4} = \left( \frac{(k+1)(k+2)}{2} \right)^2
+                    \]
+                    Which is the same as the right-hand side of the original statement for $n = k+1$.
+                    
+                    Therefore, the given claim holds as true for all $n \in \mathbb{Z}^+$.
+                    
+                    \[
+                    \boxed{\text{end 1}}
+                    \]
+            \end{proof}
+		\item  Please prove that every $n$-tournament has a transitive subtournament on at least $\left\lfloor\log_2(n)\right\rfloor +1$ vertices. \\
+            \noindent\textbf{Claim:} Every $n$-tournament has a transitive subtournament on at least $\left\lfloor \log_2(n) \right\rfloor + 1$ vertices.
+            
+            \noindent\textbf{Proof:} I will prove this statement using induction and by using recursion on the vertices.
+
+            First I will define what a tournament is because it will make me less confused. \\
+            \begin{itemize}
+                \item \textbf{{Step 1:}Definition of a Tournament and subtournament.}
+                    A tournament is a directed graph where every pair of vertices is connected by exactly one directed edge. A subtournament is a subset of the tournament that maintains the property that every pair of vertices has a directed edge. Basically, if you have two vertices u and v either there is an edge from u to v or from v to u. But not both. 
+
+                    A subtournament is a subset of a tournament that maintains the property that every pair of vertices has exactly one directed edge between them. 
+            
+                \item \textbf{Step 2: Transitive Tournament.}
+                    A transitive tournament is a directed acyclic (not displaying or forming part of a cycle) graph (DAG) where there is a directed edge from vertex $u$ to vertex $v$ whenever $u < v$. In such a tournament, there are no cycles, and all vertices can be ordered linearly such that all directed edges point from a smaller vertex to a larger vertex.
+
+                    For example, if you have vertices and you label them as 1, ,...n, a transitive tournament with have directed edges from i to j for every time that i is less than j. This makes sure that there are no cycles. And, it makes it so that all the vertices can be listed in a way the respects all of the directed edges. 
+
+                    Basically it is like a single elimination tournament. lets arbitrarily say fruit. we have an array with [apple, banana, orange, lemon, lime, pineapple, raspberry, and strawberry] in our first group we will have apple versus banana and lets say that apple wins. next we'll have orange and lemon, and the winner is lemon. lime vs pineapple and pineapple wins. and lastly raspberry vs strawberry where raspberry wins. Only the winners would move on to the next round and the losers would not be touch again, they have no chance of winning. Wed then do the same for the next group until there was one winner. 
+            
+                \item \textbf{Step 3: Recursive Construction.}
+                    To construct a transitive subtournament, we proceed recursively. Consider and select any vertex $v$ in the tournament. Then, split the remaining vertices into two sets, one of winners and one of losers:
+                    \begin{itemize}
+                        \item $S_{\text{win}}(v)$: The set of vertices that $v$ beats (the directed edge is from $v$ to these vertices).
+                        \item $S_{\text{lose}}(v)$: The set of vertices that beat $v$ (the directed edge is from these vertices to $v$).
+                    \end{itemize}
+                    
+                    These two sets form a partition of the vertices (excluding v). Since the tournament has $n$ vertices, at least one of the two sets, win or lose, must have size at least $\left\lfloor \frac{n-1}{2} \right\rfloor$. This is because there are n-1 remaining vertices after excluding v and at least have of them have to go into one of the two sets. We can recursively apply this argument to the larger of these two sets then as you keep partitioning the graph it will get smaller every time. 
+            
+                \item \textbf{Step 4: Recursion}
+                    At each step of the process, the number of vertices is reduced by half. if a set of chosen (win/lose) then the size of the tournament being selected deceases every recursive call. This process continues until the remaining number of vertices is equal to 1. And the number of steps is $\left\lfloor \log_2(n) \right\rfloor$. Since the single vertex is counted as part of the transitive subtournament, the total number of vertices is $\left\lfloor \log_2(n) \right\rfloor$. 
+            
+            \end{itemize}
+            
+            Therefore, every $n$-tournament, no matter the size, contains a transitive subtournament with at least $\left\lfloor \log_2(n) \right\rfloor + 1$ vertices.
+            
+            \[
+            \boxed{\text{end 2}}
+            \]
+            \end{proof}
+		\item Prove the following theorem in two ways:
+		{\bf Theorem:} \emph{Every tournament contains a Hamiltonian path.}
+		
+\noindent\textbf{Claim:} Every tournament on $n$ vertices has a Hamiltonian path.
+
+First I will define a Hamiltonian path - a Hamiltonian Path is a path in a tournament that us a directed path that visits each vertex exactly once. 
+\begin{proof}
+    For my first proof I will use induction on the number of vertices, $n$, in the tournament.
+    \section*{Proof 1: Induction}
+
+    \begin{itemize}
+        \item \textbf{Base:} For $n = 1$, a single vertex forms a Hamiltonian path cause it only contains one vertex.
+        
+        \item \textbf{Induction hypothesis:} I will assume that every tournament on $k$ vertices contains a Hamiltonian path. and will now show that a tournament on $k+1$ vertices also contains a Hamiltonian path and that there is a directed path that visits all k vertices exactly once. 
+        
+        \item \textbf{Induction:} Consider a tournament $T$ on $k+1$ vertices.To prove this I will begin by removing one vertex $v$ from the tournament. By the inductive hypothesis, the remaining tournament now has $k$ vertices and this smaller tournament contains a Hamiltonian path, that I'm gonna call $P$.
+
+        The hamiltonian path (P) on k can be represented as an ordered sequences of vertices: $P = (v1,v2,...,vk)$
+        
+        Now, I will reintroduce vertex v into P. I'll do this by comparing $v$ to the vertices in $P$. There are two senerios for this, either: There is a vertex $u$ in P and a directed edge from v to u. for this senerio I just insert v before u in the path. The other sernerio is: No vertex u exists (ex there are directed edges from every vertex in P to $v$ abd v will be placed at the end of the path P. In either case P will be extended to include v without breaking the directed-ness (I know that's not a word) of the path. This gives us the result of a hamiltonian path on k+1 vertices. 
+        
+        So, based on this every tournament on n vertices contains a Hamiltonian path. 
+    \end{itemize}
+    
+    Therefore, by induction, every tournament contains a Hamiltonian path.
+\end{proof}
+\\ Now I prove this with maximality:
+\section*{Proof 2: Maximality}
+
+\noindent\textbf{Claim:} Every tournament on $n$ vertices has a Hamiltonian path.
+
+\begin{proof}
+    We will prove the statement by constructing a maximal path. maximality is defined as the maximal path which google defines as: a path within a graph that cannot be extended further without repeating a vertex on the path
+
+    \begin{itemize}
+        \item \textbf{Step 1:} I choose any vertex in the tournament and treat it as a path containing a single vertex. I will call this $v_{1}$ and the path is $P=(v_{1})$. 
+        
+        \item \textbf{Step 2:} Now, I will iteratively extend this path. For each step, I will consider a vertex $v$ that is not already in the path. For this there are two possibilities:
+        \begin{itemize}
+            \item There is a directed edge from some vertex in the path($u$) to $v$. In this case, insert $v$ into the path immediately after $u$. This keeps the path as directed because v follows a vertex that is pointing to it. 
+            \item All directed edges from $v$ point to vertices earlier in the path, Meaning that v has edges directed toward all the vertices currently in the path. For this we insert $v$ at the beginning of the path.
+        \end{itemize}
+        
+        \item \textbf{Step 3:} Repeat this process until no vertices remain outside the path. Since I can always insert a vertex into a path in one of these two ways above (end or beginning), the path grows to include all $n$ vertices. This process is guaranteed to end when all n vertices are part if the path. Then t the end, we obtain a Hamiltonian path. 
+    \end{itemize}
+    
+    Since the process always succeeds in adding a new vertex, the final path is maximal and spans all vertices. therefore, every tournament contains a Hamiltonian path.
+\end{proof}
+		\end{enumerate}
+        \[
+        \boxed{\text{end 3}}
+        \]
+		%\item Let $D = (V,A)$ be a directed graph whose underlying graph is connected.  
+		%Formulate and prove a theorem that says precisely when $D$ has an Eulerian tour. 
+		
+		\item {\bf Cut up a pizza.}  Suppose you have a pizza and an extremely sharp pizza cutter (I'm talking, like, this thing can cut a molecule comprised of two atoms in half).  
+		What is the maximum number of pieces into which the pizza can be cut using $n$ straight cuts?  Let $P(n)$ denote the 
+		number sought (so $P$ is a function whose domain is the nonnegative integers, and $P(0) =1$).
+		
+		\section*{Part 1: Using Planar Graphs and Euler’s Formula}
+
+\noindent\textbf{Claim:} The maximum number of pieces into which the pizza can be cut by $n$ straight cuts is given by the formula:
+    \[
+    P(n) = \frac{n(n+1)}{2} + 1
+    \]
+    
+    \begin{proof}
+        \begin{itemize}
+            \item \textbf{Step 1: Modeling as a Planar Graph.} Each straight cut through the pizza corresponds to a line in the plane. Each of these lines divides the pizza into pieces, where intersections between lines create additional regions (pieces). The problem can be modeled as adding edges to a planar graph.
+    
+            \item \textbf{Step 2: Euler’s Formula.} Euler’s characteristic for planar graphs states that for any connected planar graph:
+            \[
+            V - E + F = 2
+            \]
+            where $V$ is the number of vertices, $E$ is the number of edges, and $F$ is the number of faces (pieces). The cuts and intersections define edges and vertices, and we want to maximize the number of faces $F$ (pieces of pizza).
+    
+            \item \textbf{Step 3: Counting Faces.} When $n = 0$, there is one piece of pizza (the whole pizza), so $P(0) = 1$.
+    
+            For $n = 1$, a single straight cut divides the pizza into two pieces: $P(1) = 2$.
+    
+            For each additional cut, the new line can intersect the previous lines in up to $n-1$ points, creating $n$ new regions (pieces of pizza).
+    
+            \item \textbf{Step 4: Maximum Pieces.} After $n$ cuts, the maximum number of pieces can be expressed as:
+            \[
+            P(n) = P(n-1) + n
+            \]
+            Using this recurrence, we find the closed form solution for the maximum number of pieces:
+            \[
+            P(n) = \frac{n(n+1)}{2} + 1
+            \]
+        \end{itemize}
+        
+        Therefore, the maximum number of pizza pieces after $n$ cuts is $\frac{n(n+1)}{2} + 1$.
+    \end{proof}
+    
+    \section*{Part 2: Proving the Formula by Induction}
+    
+    \noindent\textbf{Claim:} The formula $P(n) = \frac{n(n+1)}{2} + 1$ is correct, and can be proven using induction.
+    
+    \begin{proof}
+        We will prove this formula by mathematical induction.
+    
+        \begin{itemize}
+            \item \textbf{Base Case:} For $n = 0$, we have $P(0) = 1$. This matches the formula:
+            \[
+            P(0) = \frac{0(0+1)}{2} + 1 = 1
+            \]
+            So the base case holds.
+    
+            \item \textbf{Inductive Hypothesis:} Assume that the formula holds for $n = k$. That is, assume:
+            \[
+            P(k) = \frac{k(k+1)}{2} + 1
+            \]
+    
+            \item \textbf{Inductive Step:} We need to show that the formula holds for $n = k+1$. Using the recurrence relation $P(n) = P(n-1) + n$, we compute:
+            \[
+            P(k+1) = P(k) + (k+1)
+            \]
+            Substituting the inductive hypothesis for $P(k)$:
+            \[
+            P(k+1) = \left( \frac{k(k+1)}{2} + 1 \right) + (k+1)
+            \]
+            Simplifying the right-hand side:
+            \[
+            P(k+1) = \frac{k(k+1)}{2} + (k+1) + 1
+            \]
+            Factor out $(k+1)$:
+            \[
+            P(k+1) = \frac{k(k+1) + 2(k+1)}{2} + 1 = \frac{(k+1)(k+2)}{2} + 1
+            \]
+            Thus, the formula holds for $n = k+1$.
+    
+        \end{itemize}
+    
+        By the principle of mathematical induction, the formula $P(n) = \frac{n(n+1)}{2} + 1$ is true for all non-negative integers $n$.
+    \end{proof}
+        \[
+        \boxed{\text{end 4}}
+        \]
+	\noindent \underline{\hspace{3in}}
+\end{document}
