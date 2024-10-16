@@ -224,7 +224,7 @@ First I will define a Hamiltonian path - a Hamiltonian Path is a path in a tourn
 		What is the maximum number of pieces into which the pizza can be cut using $n$ straight cuts?  Let $P(n)$ denote the 
 		number sought (so $P$ is a function whose domain is the nonnegative integers, and $P(0) =1$).
 		
-		\section*{Part 1: Using Planar Graphs and Euler’s Formula}
+		\section*{Part 1: Planar Graphs and Euler’s Formula}
 
 \noindent\textbf{Claim:} The maximum number of pieces into which the pizza can be cut by $n$ straight cuts is given by the formula:
     \[
@@ -233,25 +233,43 @@ First I will define a Hamiltonian path - a Hamiltonian Path is a path in a tourn
     
     \begin{proof}
         \begin{itemize}
-            \item \textbf{Step 1: Modeling as a Planar Graph.} Each straight cut through the pizza corresponds to a line in the plane. Each of these lines divides the pizza into pieces, where intersections between lines create additional regions (pieces). The problem can be modeled as adding edges to a planar graph.
+            \item \textbf{Step 1: Modeling as a Planar Graph.} 
+            First what is a Planar Graph - via google: a graph that can be embedded in the plane, i.e., it can be drawn on the plane in such a way that its edges intersect only at their endpoints
+                \begin{figure}[h!]
+                    \centering
+                    \includegraphics[width=\linewidth]{planar.png} % Adjust width as needed
+                    \caption{Planar Graphs}
+                    \label{fig:planar_graphs}
+                \end{figure}
+            
+            Each straight cut through the pizza corresponds to a line in the plane. Each of these lines divides the pizza into pieces, where intersections between lines create additional regions (pieces). The problem can be modeled as adding edges to a planar graph.
     
-            \item \textbf{Step 2: Euler’s Formula.} Euler’s characteristic for planar graphs states that for any connected planar graph:
+            \item \textbf{Step 2: Euler’s Formula} Euler’s characteristic for planar graphs:
             \[
             V - E + F = 2
             \]
-            where $V$ is the number of vertices, $E$ is the number of edges, and $F$ is the number of faces (pieces). The cuts and intersections define edges and vertices, and we want to maximize the number of faces $F$ (pieces of pizza).
+            where $V$ is the number of vertices, $E$ is the number of edges, and $F$ is the number of pieces. The cuts and intersections define edges and vertices, and we want to maximize the number of $F$ (pieces of pizza) when adding up to n lines.
     
-            \item \textbf{Step 3: Counting Faces.} When $n = 0$, there is one piece of pizza (the whole pizza), so $P(0) = 1$.
+            \item \textbf{Step 3: Counting Faces} When $n = 0$, there is one piece of pizza (the whole pizza), so $P(0) = 1$.
     
             For $n = 1$, a single straight cut divides the pizza into two pieces: $P(1) = 2$.
     
-            For each additional cut, the new line can intersect the previous lines in up to $n-1$ points, creating $n$ new regions (pieces of pizza).
-    
-            \item \textbf{Step 4: Maximum Pieces.} After $n$ cuts, the maximum number of pieces can be expressed as:
+            For each additional cut, the new line can intersect the previous lines in up to $n-1$ points, creating $n$ new regions (pieces of pizza).So the maximum number of pieces is made by the n-th cut is n:
             \[
-            P(n) = P(n-1) + n
+            P(n)=P(n-1)+n
+            \]      
+
+            Basically, the max number of pieces after $n$ cutsis the number of pieces after $n-1$ plus the number of new pieces created by nth. 
+            
+            \item \textbf{Step 4: Derive} summing up the series using recurrence $P(x)=P(n-1)+n$ starting at P(0)=1:
+            \[
+            P(n) = 1+1+2+3+...+n
             \]
-            Using this recurrence, we find the closed form solution for the maximum number of pieces:
+            the sum of the above is that arithmetic series from the previous assignment and it is equal to 
+            \[
+            P(n) = \frac{n(n+1)}{2}
+            \]
+            Then you add one to it cause the initial whole pizza counts as 1:
             \[
             P(n) = \frac{n(n+1)}{2} + 1
             \]
@@ -260,34 +278,34 @@ First I will define a Hamiltonian path - a Hamiltonian Path is a path in a tourn
         Therefore, the maximum number of pizza pieces after $n$ cuts is $\frac{n(n+1)}{2} + 1$.
     \end{proof}
     
-    \section*{Part 2: Proving the Formula by Induction}
+    \section*{Part 2: Induction}
     
     \noindent\textbf{Claim:} The formula $P(n) = \frac{n(n+1)}{2} + 1$ is correct, and can be proven using induction.
     
     \begin{proof}
-        We will prove this formula by mathematical induction.
+        now I will prove with induction.
     
         \begin{itemize}
-            \item \textbf{Base Case:} For $n = 0$, we have $P(0) = 1$. This matches the formula:
+            \item \textbf{Base} For $n = 0$, we have $P(0) = 1$. This matches the formula:
             \[
             P(0) = \frac{0(0+1)}{2} + 1 = 1
             \]
-            So the base case holds.
+            So the base holds
     
-            \item \textbf{Inductive Hypothesis:} Assume that the formula holds for $n = k$. That is, assume:
+            \item \textbf{Hypothesis:} Assuming that the formula holds for $n = k$:
             \[
             P(k) = \frac{k(k+1)}{2} + 1
             \]
     
-            \item \textbf{Inductive Step:} We need to show that the formula holds for $n = k+1$. Using the recurrence relation $P(n) = P(n-1) + n$, we compute:
+            \item \textbf{Induction:} I now show that the formula holds for $n = k+1$. Using the recurrence relation $P(n) = P(n-1) + n$, compute with the recurrence relation:
             \[
             P(k+1) = P(k) + (k+1)
             \]
-            Substituting the inductive hypothesis for $P(k)$:
+            Substituting the hypothesis for $P(k)$:
             \[
             P(k+1) = \left( \frac{k(k+1)}{2} + 1 \right) + (k+1)
             \]
-            Simplifying the right-hand side:
+            Simplifying the right:
             \[
             P(k+1) = \frac{k(k+1)}{2} + (k+1) + 1
             \]
@@ -295,12 +313,10 @@ First I will define a Hamiltonian path - a Hamiltonian Path is a path in a tourn
             \[
             P(k+1) = \frac{k(k+1) + 2(k+1)}{2} + 1 = \frac{(k+1)(k+2)}{2} + 1
             \]
-            Thus, the formula holds for $n = k+1$.
+            And wow, it is the same, the formula holds for $n = k+1$.
     
         \end{itemize}
-    
-        By the principle of mathematical induction, the formula $P(n) = \frac{n(n+1)}{2} + 1$ is true for all non-negative integers $n$.
-    \end{proof}
+        \end{proof}
         \[
         \boxed{\text{end 4}}
         \]
